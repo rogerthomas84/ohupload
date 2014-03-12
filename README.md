@@ -1,5 +1,5 @@
-# OhUpload
-==========
+OhUpload PHP Library
+====================
 
 ## PHP Uploads Made Easy!
 
