@@ -1,0 +1,8 @@
+{
+    "name": "rogerthomas84/ohupload",
+    "description": "An easy to use file upload class",
+    "require": {},
+    "autoload": {
+        "psr-0": {"OhUpload\\": "src/"}
+    }
+}
