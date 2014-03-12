@@ -71,8 +71,7 @@ try {
     } else {
         // Not OK!
     }
-} catch (\Exception $e) {
-    // Something happened, possibly a validator. Take a look in:
-    // \OhUpload\Validate\Exception for possible Exceptions.
+} catch (\My\Custom\Validators\MyBasicCheck $e) {
+    // Wow! You're custom validator failed!
 }
 ```
