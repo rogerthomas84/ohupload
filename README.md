@@ -25,7 +25,7 @@ try {
 ### Adding a custom validator
 
 You can easily add a validator to the validation stack. Below is an example of a custom validator.
-All custom validators must extend `\OhUpload\ValidateBase` and override the `isValid()` method. The expected return
+All custom validators must extend `\OhUpload\Validate\ValidateBase` and override the `isValid()` method. The expected return
 from the `isValid()` method has to be either:
  * `\Exception` - don't throw, just return.
  * `bool(true)`
