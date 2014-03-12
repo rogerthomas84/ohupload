@@ -6,6 +6,7 @@ OhUpload PHP Library
 ### Basic Usage
 
 ```php
+<?php
 $instance = new OhUpload('form_file_name');
 $instance->setTargetDirectory('/path/to/upload/directory');
 try {
@@ -59,6 +60,7 @@ class MyBasicCheck extends ValidateBase
 To add it into the process, simply use:
 
 ```php
+<?php
 $instance = new OhUpload('form_file_name');
 $instance->setTargetDirectory('/path/to/upload/directory');
 $instance->addValidator('/My/Custom/Validators/MyBasicCheck'); // This is a string, not an instance.
