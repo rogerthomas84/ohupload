@@ -5,6 +5,8 @@ OhUpload PHP Library
 
 ### Basic Usage
 
+You can run a working example of this file by looking in the `example` folder.
+
 ```php
 <?php
 $instance = new OhUpload('form_file_name');
