@@ -2,6 +2,7 @@
     "name": "rogere84/ohupload",
     "description": "An easy to use file upload class",
     "require": {},
+    "license": "MIT",
     "autoload": {
         "psr-0": {"src/OhUpload": ""}
     }
