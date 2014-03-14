@@ -9,7 +9,7 @@ You can run a working example of this file by looking in the `example` folder.
 
 ```php
 <?php
-$instance = new OhUpload('form_file_name');
+$instance = new Upload('form_file_name');
 $instance->setTargetDirectory('/path/to/upload/directory');
 try {
     if ($instance->receive() === true) {
@@ -63,7 +63,7 @@ To add it into the process, simply use:
 
 ```php
 <?php
-$instance = new OhUpload('form_file_name');
+$instance = new Upload('form_file_name');
 $instance->setTargetDirectory('/path/to/upload/directory');
 $instance->addValidator('/My/Custom/Validators/MyBasicCheck'); // This is a string, not an instance.
 try {

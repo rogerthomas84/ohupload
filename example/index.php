@@ -6,7 +6,7 @@ require '../test/bootstrap.php';
 
         <?php
         if (!empty($_FILES)) {
-            $instance = new \OhUpload\OhUpload('file');
+            $instance = new \OhUpload\Upload('file');
             $instance->setTargetDirectory(sys_get_temp_dir());
             $instance->setRenameFunction(
                 function ($name) {

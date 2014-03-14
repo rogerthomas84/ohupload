@@ -1,12 +1,20 @@
 {
     "name": "rogere84/ohupload",
     "description": "An easy to use file upload class",
-    "require": {},
-    "type": "library",
+    "keywords": ["ohupload"],
+    "homepage": "https://github.com/rogerthomas84/ohconsole",
     "license": "MIT",
-    "autoload" : {
-        "psr-4" : {
-            "OhUpload\\" : "src/"
+    "authors": [
+        {
+            "name": "Roger Thomas",
+            "email": "rogere84@gmail.com"
         }
+    ],
+    "require": {
+        "php": ">=5.3.2"
+    },
+    "autoload": {
+        "psr-0": { "OhUpload": "./" },
+        "files": ["test/bootstrap.php"]
     }
 }

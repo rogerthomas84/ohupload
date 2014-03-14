@@ -21,6 +21,6 @@ array(1) {
 }
 ```
 
-To emulate a successful upload, you'll need to use the `\OhUpload\OhUpload::useMoveUploadedFile($bool)` method to tell
+To emulate a successful upload, you'll need to use the `\OhUpload\Upload::useMoveUploadedFile($bool)` method to tell
 OhUpload to use the `copy()` method versus the `move_uploaded_file()` method.
 

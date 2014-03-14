@@ -32,13 +32,13 @@
  */
 namespace OhUploadTest;
 
-use OhUpload\OhUpload;
+use OhUpload\Upload;
 
 class OhUploadTest extends \PHPUnit_Framework_TestCase
 {
     public function testSettersAndGetters()
     {
-        $instance = new OhUpload();
+        $instance = new Upload();
         $instance->setRenameFunction(
             function ($name) {
                 return $name . 'foo';
@@ -46,18 +46,18 @@ class OhUploadTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertInstanceOf('\Closure', $instance->getRenameFunction());
         $this->assertNull($instance->getTargetDirectory());
-        $this->assertInstanceOf('\OhUpload\OhUpload', $instance->setTargetDirectory('/some/path'));
+        $this->assertInstanceOf('\OhUpload\Upload', $instance->setTargetDirectory('/some/path'));
         $this->assertNotEmpty($instance->getValidators());
-        $this->assertInstanceOf('\OhUpload\OhUpload', $instance->setValidators(array('\OhUpload\Validate\ErrorCode')));
+        $this->assertInstanceOf('\OhUpload\Upload', $instance->setValidators(array('\OhUpload\Validate\ErrorCode')));
         $this->assertCount(1, $instance->getValidators());
-        $this->assertInstanceOf('\OhUpload\OhUpload', $instance->addValidator('\OhUpload\Validate\IsUploadedFile'));
+        $this->assertInstanceOf('\OhUpload\Upload', $instance->addValidator('\OhUpload\Validate\IsUploadedFile'));
         $this->assertCount(2, $instance->getValidators());
         $this->assertEquals('/some/path', $instance->getTargetDirectory());
     }
 
     public function testInvalidValidators()
     {
-        $instance = new OhUpload();
+        $instance = new Upload();
         $count = count($instance->getValidators());
         $instance->addValidator('\OhUpload\Validate\IsUploadedFile');
         $this->assertCount(($count + 1), $instance->getValidators());
@@ -72,7 +72,7 @@ class OhUploadTest extends \PHPUnit_Framework_TestCase
 
     public function testNonCallableRenameMethodThrowsException()
     {
-        $instance = new OhUpload();
+        $instance = new Upload();
         try {
             $instance->setRenameFunction('foo');
         } catch (\Exception $e) {
@@ -85,7 +85,7 @@ class OhUploadTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidTargetDirectoryThrowsException()
     {
-        $instance = new OhUpload();
+        $instance = new Upload();
         try {
             $instance->receive();
         } catch (\Exception $e) {
@@ -98,7 +98,7 @@ class OhUploadTest extends \PHPUnit_Framework_TestCase
 
     public function testRenameMethod()
     {
-        $instance = new OhUpload();
+        $instance = new Upload();
         $this->assertNotContains('foo', $instance->generateFileNameFromGivenName('foobar'));
         $this->assertStringEndsWith('.jpg', $instance->generateFileNameFromGivenName('foobar.jpg'));
         $instance->setRenameFunction(
@@ -118,7 +118,7 @@ class OhUploadTest extends \PHPUnit_Framework_TestCase
         );
 
         try {
-            $instance = new OhUpload();
+            $instance = new Upload();
             $instance->setTargetDirectory(sys_get_temp_dir());
             $instance->receive();
         } catch (\Exception $e) {
@@ -143,7 +143,7 @@ class OhUploadTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $instance = new OhUpload();
+        $instance = new Upload();
         $instance->setTargetDirectory(sys_get_temp_dir());
         $instance->setValidators($this->getValidatorsFromInstance($instance));
         $instance->useMoveUploadedFile(false);
@@ -166,7 +166,7 @@ class OhUploadTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $instance = new OhUpload();
+        $instance = new Upload();
         $instance->setTargetDirectory(sys_get_temp_dir());
         $instance->setValidators($this->getValidatorsFromInstance($instance));
         $this->assertFalse($instance->receive());
@@ -175,7 +175,7 @@ class OhUploadTest extends \PHPUnit_Framework_TestCase
 
     public function testReceivingFileReturnsFalseAtEndOfMethod()
     {
-        $instance = new OhUpload();
+        $instance = new Upload();
         $instance->setTargetDirectory(sys_get_temp_dir());
         $this->assertFalse($instance->receive());
     }
@@ -204,10 +204,10 @@ class OhUploadTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Clean the validators, specifically removing the IsUploadedFile validator
-     * @param OhUpload $instance
+     * @param Upload $instance
      * @return multitype:
      */
-    protected function getValidatorsFromInstance(OhUpload $instance)
+    protected function getValidatorsFromInstance(Upload $instance)
     {
         $validators = $instance->getValidators();
         foreach ($validators as $key => $validator) {

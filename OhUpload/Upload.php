@@ -36,7 +36,7 @@ use OhUpload\Exception\RenameMethodMustBeCallableException;
 use OhUpload\Exception\TargetDirectoryMustBeSetAndBeWritableException;
 use OhUpload\Validate\ValidateBase;
 
-class OhUpload
+class Upload
 {
     /**
      * @var string|null
