@@ -4,6 +4,6 @@
     "require": {},
     "license": "MIT",
     "autoload": {
-        "psr-0": {"src/OhUpload": ""}
+        "psr-0": {"": "src\/"}
     }
 }
