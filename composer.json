@@ -3,6 +3,6 @@
     "description": "An easy to use file upload class",
     "require": {},
     "autoload": {
-        "psr-0": {"OhUpload": "src/"}
+        "psr-2": {"OhUpload": "src/"}
     }
 }
