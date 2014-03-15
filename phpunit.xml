@@ -35,8 +35,9 @@
 
     <filter>
         <whitelist>
-            <directory>/OhUpload/*</directory>
+            <directory>src/*</directory>
             <exclude>
+                <directory>test</directory>
                 <file>test/bootstrap.php</file>
             </exclude>
         </whitelist>

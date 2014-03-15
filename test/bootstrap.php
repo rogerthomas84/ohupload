@@ -33,7 +33,7 @@
 spl_autoload_register(
     function($class)
     {
-        $dir = realpath(__DIR__ . '/../');
+        $dir = realpath(__DIR__ . '/../src');
         $path = implode(
             '',
             array(

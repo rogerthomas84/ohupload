@@ -149,6 +149,7 @@ class OhUploadTest extends \PHPUnit_Framework_TestCase
         $instance->useMoveUploadedFile(false);
         $this->assertTrue($instance->receive());
         $this->assertNotNull($instance->getFinalPath());
+        $this->assertNotEmpty($instance->getFinalFileName());
         $this->removeTemporaryFile($tmpFileObject->__toString());
     }
 

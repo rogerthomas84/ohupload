@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/rogerthomas84/ohupload.png)](http://travis-ci.org/rogerthomas84/ohupload)
+
+[View on Packagist](https://packagist.org/packages/rogerthomas84/ohupload)
+
 OhUpload PHP Library
 ====================
 

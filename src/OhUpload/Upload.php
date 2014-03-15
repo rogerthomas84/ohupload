@@ -34,7 +34,6 @@ namespace OhUpload;
 
 use OhUpload\Exception\RenameMethodMustBeCallableException;
 use OhUpload\Exception\TargetDirectoryMustBeSetAndBeWritableException;
-use OhUpload\Validate\ValidateBase;
 
 class Upload
 {
@@ -64,12 +63,9 @@ class Upload
     protected $useMoveUploadedFile = true;
 
     /**
-     * @var array
+     * @var ValidationHandler|null
      */
-    protected $validators = array(
-        '\OhUpload\Validate\ErrorCode',
-        '\OhUpload\Validate\IsUploadedFile'
-    );
+    protected $validationHandler = null;
 
     /**
      * Construct, giving the name of the field to receive
@@ -77,6 +73,7 @@ class Upload
      */
     public function __construct($fieldName = 'file')
     {
+        $this->validationHandler = new ValidationHandler();
         $this->fieldName = $fieldName;
         $this->renameMethod = function ($name) {
             $newName = uniqid((string) time() . '-');
@@ -171,7 +168,7 @@ class Upload
 
         if (array_key_exists($this->fieldName, $_FILES)) {
             $upload = $_FILES[$this->fieldName];
-            $this->runValidators($upload);
+            $this->validationHandler->run($upload);
             $newName = $this->generateFileNameFromGivenName($upload['name']);
 
             $newPath = rtrim($this->targetDirectory, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $newName;
@@ -196,7 +193,7 @@ class Upload
      */
     public function getValidators()
     {
-        return $this->validators;
+        return $this->validationHandler->get();
     }
 
     /**
@@ -209,18 +206,22 @@ class Upload
     }
 
     /**
+     * Get the final file name
+     * @return string
+     */
+    public function getFinalFileName()
+    {
+        return basename($this->finalPath);
+    }
+
+    /**
      * Set the array of validators
      * @param array $validators
-     * @return \OhUpload\OhUpload
+     * @return \OhUpload\Upload
      */
     public function setValidators(array $validators)
     {
-        $this->validators = array();
-        foreach ($validators as $fqcn) {
-            if ($this->ensureInstanceOfValidate($fqcn) === true) {
-                $this->validators[] = $fqcn;
-            }
-        }
+        $this->validationHandler->set($validators);
 
         return $this;
     }
@@ -233,48 +234,8 @@ class Upload
      */
     public function addValidator($fqcn)
     {
-        if ($this->ensureInstanceOfValidate($fqcn) === true) {
-            $this->validators[] = $fqcn;
-        }
+        $this->validationHandler->add($fqcn);
 
         return $this;
-    }
-
-    /**
-     * Run the stack of validators.
-     * @param array $file
-     * @return \Exception|boolean
-     */
-    protected function runValidators(array $file)
-    {
-        foreach ($this->validators as $fqcn)
-        {
-            $validator = new $fqcn($file);
-            /* @var $validator \OhUpload\Validate\ValidateBase */
-            if (($valid = $validator->isValid()) instanceof \Exception) {
-                throw $valid;
-            }
-        }
-
-        return true;
-    }
-
-    /**
-     * Check that the given class extends ValidateBase
-     * @param string $fqcn
-     * @return boolean
-     */
-    protected function ensureInstanceOfValidate($fqcn)
-    {
-        if (class_exists($fqcn)) {
-            $instance = new $fqcn(array());
-            if (!$instance instanceof ValidateBase) {
-                return false;
-            }
-
-            return true;
-        }
-
-        return false;
     }
 }
