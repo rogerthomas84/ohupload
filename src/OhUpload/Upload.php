@@ -90,7 +90,7 @@ class Upload
      * Set the rename method
      * @param mixed<\Closure> $closure
      * @throws RenameMethodMustBeCallableException
-     * @return \OhUpload\OhUpload
+     * @return Upload
      */
     public function setRenameFunction($closure)
     {
@@ -133,7 +133,7 @@ class Upload
 
     /**
      * @param string $dir
-     * @return \OhUpload\OhUpload
+     * @return Upload
      */
     public function setTargetDirectory($dir)
     {
@@ -145,7 +145,7 @@ class Upload
     /**
      * Whether to use move_uploaded_file or not.
      * @param boolean  $bool
-     * @return \OhUpload\OhUpload
+     * @return Upload
      */
     public function useMoveUploadedFile($bool)
     {
@@ -230,7 +230,7 @@ class Upload
      * Add a single validator to the stack. This must extend
      * \OhUpload\Validate\ValidateBase
      * @param string $fqcn
-     * @return \OhUpload\OhUpload
+     * @return Upload
      */
     public function addValidator($fqcn)
     {

@@ -56,7 +56,7 @@ class ValidationHandler
     /**
      * Run the stack of validators.
      * @param array $file
-     * @return \Exception|boolean
+     * @return boolean
      */
     public function run(array $file)
     {
